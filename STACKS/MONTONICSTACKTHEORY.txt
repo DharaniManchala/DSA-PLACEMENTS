@@ -1,0 +1,406 @@
+===============================
+MONOTONIC STACK COMPLETE NOTES
+===============================
+
+
+WHAT IS MONOTONIC STACK?
+------------------------
+
+Monotonic Stack means:
+stack maintains elements in sorted order.
+
+Two Types:
+1. Monotonic Increasing Stack
+2. Monotonic Decreasing Stack
+
+
+========================================================
+1. MONOTONIC INCREASING STACK
+========================================================
+
+Maintains:
+small → big
+
+Example:
+[1,2,3,5]
+
+While pushing:
+remove bigger elements.
+
+Condition:
+while stack and stack[-1] > current:
+    stack.pop()
+
+
+USED FOR:
+----------
+1. Next Smaller Element
+2. Previous Smaller Element
+3. Sum of Subarray Minimums
+4. Largest Rectangle Histogram
+5. Maximal Rectangle
+
+
+KEY THINKING:
+--------------
+Current element wants smaller relation.
+
+
+========================================================
+2. MONOTONIC DECREASING STACK
+========================================================
+
+Maintains:
+big → small
+
+Example:
+[9,7,5,2]
+
+While pushing:
+remove smaller elements.
+
+Condition:
+while stack and stack[-1] < current:
+    stack.pop()
+
+
+USED FOR:
+----------
+1. Next Greater Element
+2. Previous Greater Element
+3. Daily Temperatures
+4. Stock Span
+5. Sum of Subarray Maximums
+
+
+KEY THINKING:
+--------------
+Current element wants greater relation.
+
+
+========================================================
+MOST IMPORTANT PATTERN RECOGNITION
+========================================================
+
+QUESTION KEYWORDS:
+-------------------
+
+nearest
+next
+previous
+greater
+smaller
+
+THINK:
+MONOTONIC STACK
+
+
+========================================================
+TECHNIQUE 1 — NEXT GREATER ELEMENT
+========================================================
+
+QUESTION TYPE:
+---------------
+Find first greater element on RIGHT.
+
+STACK TYPE:
+-------------
+Monotonic Decreasing Stack
+
+TRAVERSAL:
+------------
+LEFT → RIGHT
+
+LOGIC:
+--------
+Current element resolves smaller elements.
+
+CONDITION:
+------------
+while stack and nums[stack[-1]] < nums[i]:
+    answer[stack.pop()] = nums[i]
+
+PROBLEMS:
+-----------
+1. Next Greater Element I
+2. Daily Temperatures
+3. Next Greater Element II
+
+
+========================================================
+TECHNIQUE 2 — NEXT SMALLER ELEMENT
+========================================================
+
+QUESTION TYPE:
+---------------
+Find first smaller element on RIGHT.
+
+STACK TYPE:
+-------------
+Monotonic Increasing Stack
+
+TRAVERSAL:
+------------
+LEFT → RIGHT
+
+CONDITION:
+------------
+while stack and nums[stack[-1]] > nums[i]:
+    answer[stack.pop()] = nums[i]
+
+PROBLEMS:
+-----------
+1. Largest Rectangle Histogram
+2. Sum of Subarray Minimums
+
+
+========================================================
+TECHNIQUE 3 — PREVIOUS GREATER ELEMENT
+========================================================
+
+QUESTION TYPE:
+---------------
+Find first greater element on LEFT.
+
+STACK TYPE:
+-------------
+Monotonic Decreasing Stack
+
+TRAVERSAL:
+------------
+LEFT → RIGHT
+
+CONDITION:
+------------
+while stack and stack[-1] <= current:
+    stack.pop()
+
+PROBLEMS:
+-----------
+1. Stock Span
+2. Previous Greater Element
+
+
+========================================================
+TECHNIQUE 4 — PREVIOUS SMALLER ELEMENT
+========================================================
+
+QUESTION TYPE:
+---------------
+Find first smaller element on LEFT.
+
+STACK TYPE:
+-------------
+Monotonic Increasing Stack
+
+TRAVERSAL:
+------------
+LEFT → RIGHT
+
+CONDITION:
+------------
+while stack and stack[-1] >= current:
+    stack.pop()
+
+PROBLEMS:
+-----------
+1. Largest Rectangle Histogram
+2. Sum of Subarray Minimums
+
+
+========================================================
+TECHNIQUE 5 — CONTRIBUTION TECHNIQUE
+========================================================
+
+USED IN:
+---------
+1. Sum of Subarray Minimums
+2. Sum of Subarray Maximums
+3. Sum of Subarray Ranges
+
+MAIN IDEA:
+------------
+Instead of finding answer for each subarray,
+find contribution of each element.
+
+FORMULA:
+----------
+arr[i] * left * right
+
+WHERE:
+-------
+left  = choices on left
+right = choices on right
+
+NEED:
+------
+1. Previous Smaller
+2. Next Smaller
+
+OR
+
+1. Previous Greater
+2. Next Greater
+
+
+========================================================
+TECHNIQUE 6 — HISTOGRAM TECHNIQUE
+========================================================
+
+USED IN:
+---------
+1. Largest Rectangle Histogram
+2. Maximal Rectangle
+
+MAIN IDEA:
+------------
+Find width where current bar can expand.
+
+NEED:
+------
+1. Previous Smaller
+2. Next Smaller
+
+FORMULA:
+----------
+width = right - left - 1
+
+area = height * width
+
+
+========================================================
+TECHNIQUE 7 — CIRCULAR ARRAY MONOTONIC STACK
+========================================================
+
+USED IN:
+---------
+1. Next Greater Element II
+
+MAIN IDEA:
+------------
+Traverse array twice.
+
+LOOP:
+-------
+for i in range(2*n):
+
+ACCESS:
+---------
+nums[i % n]
+
+
+========================================================
+TECHNIQUE 8 — STACK SIMULATION
+========================================================
+
+USED IN:
+---------
+1. Asteroid Collision
+2. Remove K Digits
+3. Baseball Game
+
+MAIN IDEA:
+------------
+Simulate real process using stack.
+
+
+========================================================
+MOST IMPORTANT INTERVIEW THINKING
+========================================================
+
+ASK THESE QUESTIONS:
+
+1. Am I searching nearest element?
+2. Greater or smaller?
+3. Next or previous?
+4. Can brute force become O(n²)?
+5. Can unresolved elements be stored?
+
+If YES:
+Think MONOTONIC STACK.
+
+
+========================================================
+GOLDEN MEMORY TRICK
+========================================================
+
+NEXT GREATER:
+--------------
+remove smaller elements
+
+NEXT SMALLER:
+--------------
+remove greater elements
+
+
+========================================================
+COMPLETE PROBLEM ROADMAP
+========================================================
+
+LEVEL 1:
+----------
+1. Next Greater Element
+2. Next Smaller Element
+3. Previous Greater Element
+4. Previous Smaller Element
+
+LEVEL 2:
+----------
+5. Daily Temperatures
+6. Online Stock Span
+7. Next Greater Element II
+8. Asteroid Collision
+
+LEVEL 3:
+----------
+9. Largest Rectangle Histogram
+10. Maximal Rectangle
+11. Sum of Subarray Minimums
+12. Sum of Subarray Ranges
+
+LEVEL 4:
+----------
+13. Trapping Rain Water
+14. Remove K Digits
+15. Car Fleet
+16. 132 Pattern
+
+
+========================================================
+MOST IMPORTANT FORMULAS
+========================================================
+
+NEXT GREATER:
+---------------
+while stack and stack[-1] < current
+
+NEXT SMALLER:
+---------------
+while stack and stack[-1] > current
+
+PREVIOUS GREATER:
+------------------
+while stack and stack[-1] <= current
+
+PREVIOUS SMALLER:
+------------------
+while stack and stack[-1] >= current
+
+
+========================================================
+FINAL INTERVIEW SECRET
+========================================================
+
+Monotonic stack problems are NOT random.
+
+Almost every problem is combination of:
+
+1. Next Greater
+2. Next Smaller
+3. Previous Greater
+4. Previous Smaller
+5. Contribution Technique
+6. Histogram Expansion
+
+MASTER THESE.
+YOU CAN SOLVE MOST PBC MONOTONIC STACK QUESTIONS.
