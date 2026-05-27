@@ -1,24 +1,21 @@
 class Solution:
-    def permute(self,nums):
+    def permutation(self,nums):
         result=[]
-        def backtrack(i):
-            if i==len(nums):
-                result.append(nums[:])
+        def backtrack(current):
+            if len(current)==len(nums):
+                result.append(current[:])
                 return
-            for j in range(i,len(nums)):
-                nums[i],nums[j]=nums[j],nums[i]
-                backtrack(i+1)
-                nums[i],nums[j]=nums[j],nums[i]
-
-        backtrack(0)
+            for i in range(len(nums)):
+                if nums[i] in current:
+                    continue
+                current.append(nums[i])
+                backtrack(current)
+                current.pop()
+        backtrack([])
         return result
-# example usage
-if __name__=="__main__":
-    sol=Solution()
-    nums=[1,2,3]
-    result=sol.permute(nums)
-    print(result)  # Output: [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 2, 1], [3, 1, 2]]
-
-    #time complexity: O(n*n!) where n is the number of elements in the array
-    #space complexity: O(n) for the recursion stack and O(n!) for storing the results
-        
+# Example usage:
+nums=[1,2,3]
+solution=Solution()
+print(f"The permutations of {nums} are: {solution.permutation(nums)}")
+# time complexity: O(n*n!) since there are n! permutations and each permutation takes O(n) time to construct.
+# space complexity: O(n) due to the maximum depth of the recursion stack being n in the worst case when all elements are included in the current permutation.
